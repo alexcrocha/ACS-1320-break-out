@@ -15,7 +15,7 @@ let leftPressed = false;
 
 
 function newRGBNumber() {
-  return Math.floor(Math.random() * 255)
+  return Math.floor(Math.random() * 256)
 }
 
 function changeColour() {
