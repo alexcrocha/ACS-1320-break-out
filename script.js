@@ -19,6 +19,7 @@ let ballColour = "#0095DD";
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
+let score = 0;
 
 const bricks = [];
 for (let c = 0; c < brickColumnCount; c++) {
@@ -92,7 +93,6 @@ function drawBricks() {
   }
 }
 
-
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
@@ -106,6 +106,7 @@ function draw() {
   drawPaddle();
   drawBricks();
   collisionDetection();
+  drawScore();
 }
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -140,12 +141,23 @@ function collisionDetection() {
         ) {
           dy = -dy;
           b.status = 0;
+          score++;
           ballColour = changeColour();
+          if (score === brickRowCount * brickColumnCount) {
+            alert("YOU WIN, CONGRATULATIONS!");
+            document.location.reload();
+            clearInterval(interval);
+          }
         }
       }
     }
   }
 }
 
+function drawScore() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText(`Score: ${score}`, 8, 20);
+}
 
 const interval = setInterval(draw, 10);
