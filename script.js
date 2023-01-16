@@ -36,6 +36,8 @@ function drawBall() {
   } else if (y + dy > canvas.height - ballRadius) {
     if (x > paddleX && x < paddleX + paddleWidth) {
       dy = -dy;
+      dx = dx + 1;
+      dy = dy - 1;
     } else {
       alert("GAME OVER");
       document.location.reload();
