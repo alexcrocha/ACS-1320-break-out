@@ -30,9 +30,17 @@ function drawBall() {
     dx = -dx;
     ballColour = changeColour();
   }
-  if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+  if (y + dy < ballRadius) {
     dy = -dy;
     ballColour = changeColour();
+  } else if (y + dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    } else {
+      alert("GAME OVER");
+      document.location.reload();
+      clearInterval(interval);
+    }
   }
 
   ctx.beginPath();
@@ -68,19 +76,20 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
-  if (e.key === "Right" || e.key === "ArrowRight") {
+  if (e.key === "Right" || e.key === "ArrowRight" || e.key === "d") {
     rightPressed = true;
-  } else if (e.key === "Left" || e.key === "ArrowLeft") {
+  } else if (e.key === "Left" || e.key === "ArrowLeft" || e.key === "a") {
     leftPressed = true;
   }
 }
 
 function keyUpHandler(e) {
-  if (e.key === "Right" || e.key === "ArrowRight") {
+  if (e.key === "Right" || e.key === "ArrowRight" || e.key === "d") {
     rightPressed = false;
-  } else if (e.key === "Left" || e.key === "ArrowLeft") {
+  } else if (e.key === "Left" || e.key === "ArrowLeft" || e.key === "a") {
     leftPressed = false;
   }
 }
 
-setInterval(draw, 10);
+const interval = setInterval(draw, 10);
+
