@@ -46,7 +46,6 @@ class Bricks {
     }
   }
 
-
   render(ctx) {
     for (let c = 0; c < this.brickColumnCount; c += 1) {
       for (let r = 0; r < this.brickRowCount; r += 1) {

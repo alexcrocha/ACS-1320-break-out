@@ -14,7 +14,6 @@ class Game {
       10,
       '#0095DD',
     );
-
     this.paddle = new Paddle(
       (this.canvas.width - 75) / 2,
       this.canvas.height - 10,
@@ -22,9 +21,7 @@ class Game {
       10,
       '#0095DD',
     );
-
     this.allBricks = new Bricks();
-
     this.scoreLabel = new GameLabel('Score: ', 8, 20, '#0095DD');
     this.livesLabel = new GameLabel('Lives: ', this.canvas.width - 65, 20, '#0095DD', 3);
 
@@ -41,7 +38,7 @@ class Game {
     document.addEventListener('mousemove', (e) => this.mouseMoveHandler(e), false);
   }
 
-  collisionDetection() {
+  collisionsWithBricks() {
     for (let c = 0; c < this.allBricks.brickColumnCount; c += 1) {
       for (let r = 0; r < this.allBricks.brickRowCount; r += 1) {
         const brick = this.allBricks.bricks[c][r];
@@ -58,10 +55,36 @@ class Game {
             this.ball.color = brick.color;
             this.scoreLabel.value += brick.points;
             if (this.allBricks.activeBricks === 0) {
-              alert(`YOU WIN, CONGRATULATIONS! You scored: ${this.scoreLabel.value}`);
+              alert(`YOU WIN, CONGRATULATIONS! Your score is ${this.scoreLabel.value}`);
               document.location.reload();
             }
           }
+        }
+      }
+    }
+  }
+
+  collisionsWithCanvasAndPaddle() {
+    if (this.ball.x + this.ball.dx > this.canvas.width - this.ball.radius
+      || this.ball.x + this.ball.dx < this.ball.radius) {
+      this.ball.dx = -this.ball.dx;
+    }
+    if (this.ball.y + this.ball.dy < this.ball.radius) {
+      this.ball.dy = -this.ball.dy;
+    } else if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
+      if (this.ball.x > this.paddle.x && this.ball.x < this.paddle.x + this.paddle.width) {
+        this.ball.dy = -this.ball.dy - 0.5;
+      } else if (this.ball.y + this.ball.dy === this.canvas.height) {
+        this.livesLabel.value -= 1;
+        if (this.livesLabel.value < 1) {
+          alert(`GAME OVER! Your score is ${this.scoreLabel.value}`);
+          document.location.reload();
+        } else {
+          this.ball.x = this.canvas.width / 2;
+          this.ball.y = this.canvas.height - 30;
+          this.ball.dx = 2;
+          this.ball.dy = -2;
+          this.paddle.x = (this.canvas.width - this.paddle.width) / 2;
         }
       }
     }
@@ -121,19 +144,13 @@ class Game {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawBackground();
-    this.ball.render(
-      this.ctx,
-      this.canvas.width,
-      this.canvas.height,
-      this.paddle,
-      this.livesLabel,
-      this.scoreLabel,
-    );
+    this.collisionsWithBricks();
+    this.collisionsWithCanvasAndPaddle();
+    this.ball.render(this.ctx);
     this.ball.move();
-    this.movePaddle();
     this.paddle.render(this.ctx);
+    this.movePaddle();
     this.allBricks.render(this.ctx);
-    this.collisionDetection();
     this.scoreLabel.render(this.ctx);
     this.livesLabel.render(this.ctx);
     requestAnimationFrame(() => this.draw());
