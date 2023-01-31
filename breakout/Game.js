@@ -74,7 +74,7 @@ class Game {
     } else if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
       if (this.ball.x > this.paddle.x && this.ball.x < this.paddle.x + this.paddle.width) {
         this.ball.dy = -this.ball.dy - 0.5;
-      } else if (this.ball.y + this.ball.dy === this.canvas.height) {
+      } else if (this.ball.y + this.ball.dy >= this.canvas.height) {
         this.livesLabel.value -= 1;
         if (this.livesLabel.value < 1) {
           alert(`GAME OVER! Your score is ${this.scoreLabel.value}`);
@@ -144,12 +144,12 @@ class Game {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawBackground();
-    this.collisionsWithBricks();
-    this.collisionsWithCanvasAndPaddle();
     this.ball.render(this.ctx);
     this.ball.move();
     this.paddle.render(this.ctx);
     this.movePaddle();
+    this.collisionsWithBricks();
+    this.collisionsWithCanvasAndPaddle();
     this.allBricks.render(this.ctx);
     this.scoreLabel.render(this.ctx);
     this.livesLabel.render(this.ctx);
