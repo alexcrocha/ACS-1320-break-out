@@ -69,10 +69,8 @@ class Game {
 
   movePaddle() {
     if (this.rightPressed) {
-      // paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
       this.paddle.moveRight(this.canvas.width);
     } else if (this.leftPressed) {
-      // paddleX = Math.max(paddleX - 7, 0);
       this.paddle.moveLeft();
     }
   }

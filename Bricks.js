@@ -46,32 +46,6 @@ class Bricks {
     }
   }
 
-  collisionDetection(ball, score) {
-    for (let c = 0; c < this.brickColumnCount; c += 1) {
-      for (let r = 0; r < this.brickRowCount; r += 1) {
-        const brick = this.bricks[c][r];
-        if (brick.status === 1) {
-          if (
-            ball.x > brick.x
-            && ball.x < brick.x + this.brickWidth
-            && ball.y > brick.y
-            && ball.y < brick.y + this.brickHeight
-          ) {
-            ball.dy = -ball.dy;
-            brick.status = 0;
-            this.activeBricks -= 1;
-            ball.color = brick.color;
-            score.value += brick.points;
-            // maxScore += brick.points;
-            if (this.activeBricks === 0) {
-              alert('YOU WIN, CONGRATULATIONS!');
-              document.location.reload();
-            }
-          }
-        }
-      }
-    }
-  }
 
   render(ctx) {
     for (let c = 0; c < this.brickColumnCount; c += 1) {
