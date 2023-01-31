@@ -5,19 +5,19 @@ import Paddle from './Paddle.js';
 import GameLabel from './GameLabel.js';
 
 class Game {
-  constructor(ctx, canvas) {
-    this.ctx = ctx;
-    this.canvas = canvas;
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext('2d');
     this.ball = new Ball(
-      canvas.width / 2,
-      canvas.height - 30,
+      this.canvas.width / 2,
+      this.canvas.height - 30,
       10,
       '#0095DD',
     );
 
     this.paddle = new Paddle(
-      (canvas.width - 75) / 2,
-      canvas.height - 10,
+      (this.canvas.width - 75) / 2,
+      this.canvas.height - 10,
       75,
       10,
       '#0095DD',
@@ -26,7 +26,7 @@ class Game {
     this.allBricks = new Bricks();
 
     this.scoreLabel = new GameLabel('Score: ', 8, 20, '#0095DD');
-    this.livesLabel = new GameLabel('Lives: ', canvas.width - 65, 20, '#0095DD', 3);
+    this.livesLabel = new GameLabel('Lives: ', this.canvas.width - 65, 20, '#0095DD', 3);
 
     this.rightPressed = false;
     this.leftPressed = false;
