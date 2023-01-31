@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable import/extensions */
 import Ball from './Ball.js';
 import Bricks from './Bricks.js';
