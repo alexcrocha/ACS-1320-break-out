@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-/* eslint-disable no-alert */
 import Game from './breakout/Game.js';
 
+// eslint-disable-next-line no-unused-vars
 const game = new Game('myCanvas');
