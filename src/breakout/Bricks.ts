@@ -12,6 +12,16 @@ function changeColour() {
 }
 
 class Bricks {
+  brickColumnCount: number;
+  brickRowCount: number;
+  brickWidth: number;
+  brickHeight: number;
+  activeBricks: number;
+  bricks: Brick[][];
+  brickPadding: number;
+  brickOffsetTop: number;
+  brickOffsetLeft: number;
+
   constructor() {
     this.bricks = [];
     this.brickWidth = 50;
@@ -27,7 +37,7 @@ class Bricks {
   }
 
   createBricks() {
-    const rowColour = [];
+    const rowColour: string[] = [];
     for (let c = 0; c < this.brickColumnCount; c += 1) {
       this.bricks[c] = [];
       for (let r = 0; r < this.brickRowCount; r += 1) {
@@ -45,7 +55,7 @@ class Bricks {
     }
   }
 
-  render(ctx) {
+  render(ctx: CanvasRenderingContext2D) {
     for (let c = 0; c < this.brickColumnCount; c += 1) {
       for (let r = 0; r < this.brickRowCount; r += 1) {
         if (this.bricks[c][r].status === 1) {
