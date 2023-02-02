@@ -1,5 +1,4 @@
-/* eslint-disable import/extensions */
-import Sprite from './Sprite.js';
+import Sprite from './Sprite';
 
 class GameLabel extends Sprite {
   constructor(text, x, y, color, value = 0, font = '16px Arial') {

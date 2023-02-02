@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/extensions
-import Sprite from './Sprite.js';
+import Sprite from './Sprite';
 
 class Brick extends Sprite {
   constructor(x, y, width = 75, height = 20, points = 1, color = '#0095DD') {

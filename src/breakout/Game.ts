@@ -1,9 +1,8 @@
 /* eslint-disable no-alert */
-/* eslint-disable import/extensions */
-import Ball from './Ball.js';
-import Bricks from './Bricks.js';
-import Paddle from './Paddle.js';
-import GameLabel from './GameLabel.js';
+import Ball from './Ball';
+import Bricks from './Bricks';
+import Paddle from './Paddle';
+import GameLabel from './GameLabel';
 
 class Game {
   constructor(canvasId) {

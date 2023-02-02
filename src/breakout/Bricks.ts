@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/extensions
-import Brick from './Brick.js';
+import Brick from './Brick';
 
 function newRGBNumber() {
   return Math.floor(Math.random() * 256);
