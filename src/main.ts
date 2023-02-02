@@ -1,5 +1,4 @@
-/* eslint-disable import/extensions */
-import Game from './breakout/Game.js';
+import Game from './breakout/Game';
 
 // eslint-disable-next-line no-unused-vars
 const game = new Game('myCanvas');

@@ -1,13 +1,22 @@
 /* eslint-disable no-alert */
-/* eslint-disable import/extensions */
-import Ball from './Ball.js';
-import Bricks from './Bricks.js';
-import Paddle from './Paddle.js';
-import GameLabel from './GameLabel.js';
+import Ball from './Ball';
+import Bricks from './Bricks';
+import Paddle from './Paddle';
+import GameLabel from './GameLabel';
 
 class Game {
-  constructor(canvasId) {
-    this.canvas = document.getElementById(canvasId);
+  ctx: CanvasRenderingContext2D;
+  canvas: HTMLCanvasElement;
+  ball: Ball;
+  paddle: Paddle;
+  allBricks: Bricks;
+  scoreLabel: GameLabel;
+  livesLabel: GameLabel;
+  rightPressed: boolean;
+  leftPressed: boolean;
+
+  constructor(canvasId: string) {
+    this.canvas = document.getElementById(canvasId) as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d');
     this.ball = new Ball(
       this.canvas.width / 2,
@@ -118,7 +127,7 @@ class Game {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  mouseMoveHandler(e) {
+  mouseMoveHandler(e: MouseEvent) {
     const relativeX = e.clientX - this.canvas.offsetLeft;
     if (relativeX > this.paddle.width / 2
       && relativeX < this.canvas.width - this.paddle.width / 2) {
@@ -126,7 +135,7 @@ class Game {
     }
   }
 
-  keyDownHandler(e) {
+  keyDownHandler(e: KeyboardEvent) {
     if (e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'd') {
       this.rightPressed = true;
     } else if (e.key === 'Left' || e.key === 'ArrowLeft' || e.key === 'a') {
@@ -134,7 +143,7 @@ class Game {
     }
   }
 
-  keyUpHandler(e) {
+  keyUpHandler(e: KeyboardEvent) {
     if (e.key === 'Right' || e.key === 'ArrowRight' || e.key === 'd') {
       this.rightPressed = false;
     } else if (e.key === 'Left' || e.key === 'ArrowLeft' || e.key === 'a') {

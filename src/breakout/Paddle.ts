@@ -1,13 +1,16 @@
-/* eslint-disable import/extensions */
-import Sprite from './Sprite.js';
+import Sprite from './Sprite';
 
 class Paddle extends Sprite {
-  constructor(x, y, width = 75, height = 10, color = '#0095DD') {
+  x: number;
+  width: number;
+  dx: number;
+
+  constructor(x: number, y: number, width = 75, height = 10, color = '#0095DD') {
     super(x, y, width, height, color);
     this.dx = 7;
   }
 
-  moveRight(canvasWidth) {
+  moveRight(canvasWidth: number) {
     this.x = Math.min(this.x + this.dx, canvasWidth - this.width);
   }
 
