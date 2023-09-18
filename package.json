@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "start": "open ./dist/index.html",
+    "start": "http-server ./dist",
     "start-win": "start ./dist/index.html"
   },
   "repository": {
@@ -20,6 +20,9 @@
     "url": "https://github.com/alexcrocha/ACS-1320-break-out/issues"
   },
   "homepage": "https://github.com/alexcrocha/ACS-1320-break-out#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  },
   "devDependencies": {
     "eslint": "^8.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
